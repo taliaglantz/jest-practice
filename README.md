@@ -1,24 +1,30 @@
 # HOW TO CREATE JEST TESTING ENVIRONMENT
 
-1. yarn init
-2. yarn 
-3. yarn add --dev jest
-4. create sum.js file and add function e.g.
+1. `yarn init`
+2. `yarn `
+3. `yarn add --dev jest`
+4. create functions.js file and add function e.g.
 
 ```
 function sum(a, b) {
   return a + b;
 }
-module.exports = sum;
+
+module.exports = {
+  sum
+  // add more on here
+};
 ```
 
-5. create sum.test.js file and add test e.g. 
+5. create functions.test.js file and add test e.g. 
 ```
-const sum = require('./sum');
+const functions = require('./functions')
 
-test('adds 1 + 2 to equal 3', () => {
-  expect(sum(1, 2)).toBe(3);
-});
+describe('sum', () => {
+  test ('adds 1 + 2 to equal 3', () => {
+    expect(functions.sum(1,2)).toBe(3)
+  })
+})
 ```
 6. add following to package.json
 ```
@@ -29,7 +35,7 @@ test('adds 1 + 2 to equal 3', () => {
 }
 ```
 
-7. run yarn test
+7. run `yarn test`
 
 ## MATCHERS
 
@@ -98,7 +104,7 @@ test('two plus two', () => {
 ```
 test('adding floating point numbers', () => {
   const value = 0.1 + 0.2;
-  //expect(value).toBe(0.3);           This won't work because of rounding error
+  //expect(value).toBe(0.3);    This won't work because of rounding error
   expect(value).toBeCloseTo(0.3); // This works.
 });
 ```
@@ -128,7 +134,7 @@ const shoppingList = [
   'paper towels',
   'milk',
 ];
-```
+
 test('the shopping list has milk on it', () => {
   expect(shoppingList).toContain('milk');
   expect(new Set(shoppingList)).toContain('milk');
@@ -141,8 +147,7 @@ test('the shopping list has milk on it', () => {
 function compileAndroidCode() {
   throw new Error('you are using the wrong JDK');
 }
-```
-```
+
 test('compiling android goes as expected', () => {
   expect(() => compileAndroidCode()).toThrow();
   expect(() => compileAndroidCode()).toThrow(Error);
@@ -182,3 +187,6 @@ test('the data is peanut butter', done => {
   fetchData(callback);
 });
 ```
+## MISCELLANEOUS
+
+- adding an 'x' before describe enables skipping of tests
